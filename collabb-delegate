@@ -1,0 +1,51 @@
+#! /usr/bin/env sh
+
+authorName="Jobin Lawrance"
+currentDate=`date +"%d/%m/%Y"`
+
+while getopts ":n:" opt; do
+  case $opt in
+    n)
+        name=$OPTARG
+        fileName="${name}Adapter.kt"
+        echo "import android.support.annotation.LayoutRes" > $fileName
+        echo "import android.support.v7.widget.RecyclerView" >> $fileName
+        echo "import android.view.View" >> $fileName
+        echo "import android.view.ViewGroup" >> $fileName
+        echo "import com.stylabs.collabb.core.adapter.AdapterDelegate" >> $fileName
+        echo "import com.stylabs.collabb.core.adapter.DisplayableItem" >> $fileName
+        echo "import com.stylabs.collabb.core.di.Navigator" >> $fileName
+        echo "import com.stylabs.collabb.core.extension.inflate" >> $fileName
+        echo $'import kotlinx.android.extensions.LayoutContainer\n' >> $fileName
+        echo "/**" >> $fileName
+        echo " * Created by $authorName on $currentDate." >> $fileName
+        echo " */" >> $fileName
+        echo "class ${name}Adapter(@LayoutRes val viewId: Int) : AdapterDelegate<List<DisplayableItem>>() {" >> $fileName
+        echo "" >> $fileName
+        echo "  override fun isForViewType(items: List<DisplayableItem>, position: Int): Boolean {" >> $fileName
+        echo "    return items[position] is ${name}DisplayableItem" >> $fileName
+        echo $'  }\n' >> $fileName
+
+
+        echo "  override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {" >> $fileName
+        echo "    return ${name}ViewHolder(parent.inflate(viewId))" >> $fileName
+        echo $'  }\n' >> $fileName
+
+        echo "  override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, clickListener: (DisplayableItem, Navigator.Extras) -> Unit) {" >> $fileName
+        echo "    (holder as ${name}ViewHolder).onBindViewHolder(items[position] as ${name}DisplayableItem)" >> $fileName    
+        echo $'  }\n' >> $fileName
+
+        echo "  class ${name}ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {" >> $fileName
+        echo "    fun onBindViewHolder(${name}DisplayableItem: ${name}DisplayableItem) {" >> $fileName
+        echo "      TODO()" >> $fileName
+        echo "    }" >> $fileName
+        echo "  }" >> $fileName
+        echo "}" >> $fileName
+      ;;
+    :)
+	  echo ""
+      echo "Option -$OPTARG requires delegate name as an argument"
+      exit 1
+      ;;
+  esac
+done
