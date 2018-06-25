@@ -3,8 +3,10 @@
 authorName="Jobin Lawrance"
 currentDate=`date +"%d/%m/%Y"`
 
-while getopts ":n:" opt; do
+while getopts ":n:a:" opt; do
   case $opt in
+    a) 
+      authorName=$OPTARG ;;
     n)
         name=$OPTARG
         fileName="${name}Adapter.kt"
@@ -36,7 +38,7 @@ while getopts ":n:" opt; do
         echo $'  }\n' >> $fileName
 
         echo "  class ${name}ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {" >> $fileName
-        echo "    fun onBindViewHolder(${name}DisplayableItem: ${name}DisplayableItem) {" >> $fileName
+        echo "    fun onBindViewHolder(displayableItem: ${name}DisplayableItem) {" >> $fileName
         echo "      TODO()" >> $fileName
         echo "    }" >> $fileName
         echo "  }" >> $fileName
