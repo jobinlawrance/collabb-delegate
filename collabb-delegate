@@ -29,7 +29,7 @@ while getopts ":n:a:" opt; do
         echo $'  }\n' >> $fileName
 
 
-        echo "  override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {" >> $fileName
+        echo "  override fun onCreateViewHolder(parent: ViewGroup, clickListener: (DisplayableItem, Navigator.Extras) -> Unit): RecyclerView.ViewHolder {" >> $fileName
         echo "    return ${name}ViewHolder(parent.inflate(viewId))" >> $fileName
         echo $'  }\n' >> $fileName
 
