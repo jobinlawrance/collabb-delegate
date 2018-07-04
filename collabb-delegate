@@ -14,10 +14,6 @@ while getopts ":n:a:" opt; do
         echo "import android.support.v7.widget.RecyclerView" >> $fileName
         echo "import android.view.View" >> $fileName
         echo "import android.view.ViewGroup" >> $fileName
-        echo "import com.stylabs.collabb.core.adapter.AdapterDelegate" >> $fileName
-        echo "import com.stylabs.collabb.core.adapter.DisplayableItem" >> $fileName
-        echo "import com.stylabs.collabb.core.di.Navigator" >> $fileName
-        echo "import com.stylabs.collabb.core.extension.inflate" >> $fileName
         echo $'import kotlinx.android.extensions.LayoutContainer\n' >> $fileName
         echo "/**" >> $fileName
         echo " * Created by $authorName on $currentDate." >> $fileName
