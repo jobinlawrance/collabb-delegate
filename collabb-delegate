@@ -3,6 +3,11 @@
 authorName="Jobin Lawrance"
 currentDate=`date +"%d/%m/%Y"`
 
+# resolving current package path
+currentPath=$PWD
+truncPath=${currentPath/*com/com}
+packagePath=$(echo $truncPath | tr / .)
+
 while getopts ":n:a:" opt; do
   case $opt in
     a) 
@@ -10,7 +15,8 @@ while getopts ":n:a:" opt; do
     n)
         name=$OPTARG
         fileName="${name}Adapter.kt"
-        echo "import android.support.annotation.LayoutRes" > $fileName
+        echo "package $packagePath" > $fileName
+        echo "import android.support.annotation.LayoutRes" >> $fileName
         echo "import android.support.v7.widget.RecyclerView" >> $fileName
         echo "import android.view.View" >> $fileName
         echo "import android.view.ViewGroup" >> $fileName
