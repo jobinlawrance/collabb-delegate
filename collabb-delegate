@@ -40,7 +40,7 @@ while getopts ":n:a:" opt; do
         echo $'  }\n' >> $fileName
 
         echo "  class ${name}ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {" >> $fileName
-        echo "    fun onBindViewHolder(displayabletype: ${name}Type) {" >> $fileName
+        echo "    fun onBindViewHolder(displayabletype: ${name}Type) = with(displayabletype) {" >> $fileName
         echo "      TODO()" >> $fileName
         echo "    }" >> $fileName
         echo "  }" >> $fileName
