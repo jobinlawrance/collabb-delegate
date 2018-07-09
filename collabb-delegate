@@ -27,7 +27,7 @@ while getopts ":n:a:" opt; do
         echo "class ${name}Adapter(@LayoutRes val viewId: Int) : AdapterDelegate<List<DisplayableItem>>() {" >> $fileName
         echo "" >> $fileName
         echo "  override fun isForViewType(items: List<DisplayableItem>, position: Int): Boolean {" >> $fileName
-        echo "    return items[position] is ${name}DisplayableItem" >> $fileName
+        echo "    return items[position] is ${name}Type" >> $fileName
         echo $'  }\n' >> $fileName
 
 
@@ -36,11 +36,11 @@ while getopts ":n:a:" opt; do
         echo $'  }\n' >> $fileName
 
         echo "  override fun onBindViewHolder(items: List<DisplayableItem>, position: Int, holder: RecyclerView.ViewHolder, clickListener: (DisplayableItem, Navigator.Extras) -> Unit) {" >> $fileName
-        echo "    (holder as ${name}ViewHolder).onBindViewHolder(items[position] as ${name}DisplayableItem)" >> $fileName    
+        echo "    (holder as ${name}ViewHolder).onBindViewHolder(items[position] as ${name}Type)" >> $fileName    
         echo $'  }\n' >> $fileName
 
         echo "  class ${name}ViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {" >> $fileName
-        echo "    fun onBindViewHolder(displayableItem: ${name}DisplayableItem) {" >> $fileName
+        echo "    fun onBindViewHolder(displayabletype: ${name}Type) {" >> $fileName
         echo "      TODO()" >> $fileName
         echo "    }" >> $fileName
         echo "  }" >> $fileName
